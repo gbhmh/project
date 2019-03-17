@@ -13,6 +13,8 @@ import {FormsModule} from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import {FileUploadModule} from 'ng2-file-upload';
 import {FireauthService} from './fireauth.service';
+import { UploadComponent } from './home/upload/upload.component';
+import { MymodelsComponent } from './mymodels/mymodels.component';
 // import { PopupModule} from 'ng2-opd-popup';
 
 
@@ -21,7 +23,9 @@ import {FireauthService} from './fireauth.service';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    UploadComponent,
+    MymodelsComponent
   ],
   imports: [
     BrowserModule,
