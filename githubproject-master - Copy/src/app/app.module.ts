@@ -15,7 +15,12 @@ import {FileUploadModule} from 'ng2-file-upload';
 import {FireauthService} from './fireauth.service';
 import { UploadComponent } from './home/upload/upload.component';
 import { MymodelsComponent } from './mymodels/mymodels.component';
+import { ProfileComponent } from './profile/profile.component';
 // import { PopupModule} from 'ng2-opd-popup';
+import { MatButtonModule, MatDialogModule, MatListModule, MatProgressBarModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -25,19 +30,26 @@ import { MymodelsComponent } from './mymodels/mymodels.component';
     RegisterComponent,
     HomeComponent,
     UploadComponent,
-    MymodelsComponent
+    MymodelsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    CommonModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatListModule,
+    FlexLayoutModule,
+    BrowserAnimationsModule, MatProgressBarModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     FileUploadModule,
     HttpClientModule,
     AngularFireAuthModule,
-    // PopupModule.forRoot(),
     AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports : [UploadComponent]
 })
 export class AppModule { }

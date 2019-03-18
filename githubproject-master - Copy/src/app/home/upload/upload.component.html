@@ -1,50 +1,29 @@
 
-<div class="container-fluid">
-  <div class="row header-section">
-    <span>Upload your files</span>
-  </div>
-
-  <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-      <div class="row card">
-        <div class="col-sm-12">
-          <h4>Upload Section</h4>
-          <div id="fileSelector">
-            <input type="file" name="fileUplaod" id="fileUpload"
-                   multiple ng2FileSelect [uploader]="uploader">
-          </div>
-          <div>
-            <div class="row uploadList" *ngFor="let item of uploader.queue">
-              <div class="col-sm-4">{{item.file.name}}</div>
-              <div class="col-sm-4">
-                <div class="progress">
-                  <div class="progress-bar bg-success"
-                       [ngStyle]="{'width':item.progress+'%'}"></div>
-                </div>
-              </div>
-              <div class="col-sm-4">
-                <button type="button" class="btn btn-dark" (click)="item.upload()">Upload</button>
-                <button type="button" class="btn btn-danger" (click)="item.remove()">Cancel</button>
-              </div>
-            </div>
-          </div>
-          <div class="row" *ngIf="uploader?.queue?.length > 0">
-            <button type="button" class="btn btn-primary" (click)="uploader.uploadAll()">Upload All</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="row card">
-        <h4>Download Section</h4>
-
-        <div class="row" *ngFor="let item of attachmentList; let i = index"
-             style="margin:10px;padding:5px;background-color:rgb(231, 229, 229); border-radius:5px; line-height:40px;">
-          <div class="col-sm-7">{{item.originalname}}</div>
-          <div class="col-sm-5" style="text-align:center;"><button type="button" class="btn btn-primary" (click)="download(i)">Download</button></div>
-        </div>
+<h1>File Upload</h1>
+<div class="row">
+  <div class="col-md-6">
+    <div *ngIf="fileUpload.status==='error'">
+      <div [innerHTML]="fileUpload.message"></div>
+    </div>
+    <div *ngIf="fileUpload.status==='progress'">
+      <div class="progress" style="height: 20px;margin-bottom:20px;">
+        <div class="progress-bar" role="progressbar" [style.width.%]="fileUpload.message" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{fileUpload.message}}%</div>
       </div>
     </div>
-    <div class="col-md-2"></div>
+    <form [formGroup] = "profileForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <input type="text" formControlName="name" class="form-control" placeholder="Name">
+      </div>
+      <div class="form-group">
+        <input type="file" name="profile" (change)="onSelectedFile($event)" />
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-success">Upload</button>
+      </div>
+    </form>
+    <div *ngIf="fileUpload.status==='success'">
+      <img [src]="fileUpload.filePath" height="200px" />
+    </div>
+    <p>{{ error }}</p>
   </div>
 </div>
